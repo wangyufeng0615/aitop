@@ -1,0 +1,48 @@
+# Source files
+src/
+web/src/
+*.ts
+*.tsx
+
+# Configuration files
+tsconfig.json
+tsconfig.server.json
+vite.config.ts
+web/tsconfig.json
+web/tsconfig.node.json
+
+# Development files
+.git/
+.gitignore
+node_modules/
+*.log
+.DS_Store
+.env
+.env.local
+
+# Build artifacts that shouldn't be published
+web/node_modules/
+web/dist/
+
+# Documentation source
+DESIGN.md
+*.md.backup
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+__tests__/
+*.test.ts
+*.spec.ts
+coverage/
+
+# Keep only compiled files
+!dist/
+!cli.js
+!README.md
+!LICENSE
+!package.json
