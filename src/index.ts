@@ -27,7 +27,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date() });
 });
 
-// HTTP Hooks endpoint (Claude Code hooks -> cctop)
+// HTTP Hooks endpoint (Claude Code hooks -> aitop)
 app.post('/api/hooks/:type', (req, res) => {
   try {
     const typeParam = (req.params.type || '').toLowerCase();
@@ -63,38 +63,24 @@ app.post('/api/hooks/:type', (req, res) => {
   }
 });
 
-const isDev = process.env.NODE_ENV !== 'production';
-
-if (isDev) {
-  // 集成 Vite 中间件（单进程 HMR）
-  (async () => {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      root: path.resolve(process.cwd(), 'web'),
-      server: { middlewareMode: true }
-    });
-    app.use(vite.middlewares);
-
-    app.get('*', async (req, res, next) => {
-      try {
-        const url = req.originalUrl;
-        let template = fs.readFileSync(path.resolve(process.cwd(), 'web/index.html'), 'utf-8');
-        template = await vite.transformIndexHtml(url, template);
-        res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
-      } catch (e) {
-        vite.ssrFixStacktrace(e as Error);
-        next(e);
-      }
-    });
-  })();
-} else {
-  // 静态托管前端构建产物（Vite 输出至 dist/public）
+// Serve static files
+if (process.env.NODE_ENV === 'production') {
+  // Production: serve built files from dist/public
   const staticDir = path.resolve(__dirname, 'public');
   app.use(express.static(staticDir));
-  // Only serve index.html for non-API routes
   app.get('*', (req, res) => {
     if (!req.path.startsWith('/api/') && !req.path.startsWith('/ws')) {
       res.sendFile(path.join(staticDir, 'index.html'));
+    } else {
+      res.status(404).json({ error: 'Not found' });
+    }
+  });
+} else {
+  // Development: proxy to Vite dev server
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api/') && !req.path.startsWith('/ws')) {
+      // Redirect to Vite dev server
+      res.redirect(`http://localhost:5173${req.path}`);
     } else {
       res.status(404).json({ error: 'Not found' });
     }

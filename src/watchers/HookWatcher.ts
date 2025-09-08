@@ -21,7 +21,7 @@ export interface HookEvent {
 }
 
 /**
- * HookWatcher - Configure Claude Code to send HTTP hooks to cctop
+ * HookWatcher - Configure Claude Code to send HTTP hooks to aitop
  * 
  * Responsibilities:
  * - Ensure hooks in ~/.claude/settings.json send JSON to local HTTP endpoint

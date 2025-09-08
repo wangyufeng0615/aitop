@@ -26,7 +26,7 @@ export interface ClaudeProcess {
 }
 
 // Frontend may use this alias for display purposes
-export type ClaudeSession = ClaudeProcess;
+export interface ClaudeSession extends ClaudeProcess {}
 
 export interface LogMessage {
   parentUuid?: string;

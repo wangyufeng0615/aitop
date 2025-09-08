@@ -9,19 +9,19 @@ async function main() {
 
   // ASCII art banner
   console.log(chalk.cyan(`
-   _____ _____ _______ ____  _____  
-  / ____/ ____|__   __/ __ \\|  __ \\ 
- | |   | |       | | | |  | | |__) |
- | |   | |       | | | |  | |  ___/ 
- | |___| |____   | | | |__| | |     
-  \\_____\\_____|  |_|  \\____/|_|     
+       _ _              
+  __ _(_) |_ ___  _ __  
+ / _\` | | __/ _ \\| '_ \\ 
+| (_| | | || (_) | |_) |
+ \\__,_|_|\\__\\___/| .__/ 
+                 |_|    
 `));
-  console.log(chalk.gray('  CCTop - Claude Code Monitor\n'));
+  console.log(chalk.gray('  aitop - AI Coding Assistant Monitor\n'));
   
   // Use fixed port 8998
   const port = 8998;
   
-  console.log(chalk.cyan('🚀 Starting cctop...'));
+  console.log(chalk.cyan('🚀 Starting aitop...'));
   console.log(chalk.gray(`   Port: ${port}`));
   
   // Set environment variables
@@ -58,7 +58,7 @@ async function main() {
   
   // Handle exit
   process.on('SIGINT', () => {
-    console.log(chalk.yellow('\n👋 Shutting down cctop...'));
+    console.log(chalk.yellow('\n👋 Shutting down aitop...'));
     serverProcess.kill();
     process.exit(0);
   });

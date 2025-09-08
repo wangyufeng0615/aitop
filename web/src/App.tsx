@@ -9,7 +9,13 @@ function App() {
   const { sessions, connected, lastUpdate, initialized } = useWebSocket();
   const { beep, resume } = useSound();
   const [soundEnabled, setSoundEnabled] = useState<boolean>(() => {
-    try { return localStorage.getItem('ccm_sound_enabled') === '1'; } catch { return false; }
+    try { 
+      const stored = localStorage.getItem('aitop_sound_enabled');
+      // 如果没有存储值（第一次使用），默认为 true
+      return stored === null ? true : stored === '1';
+    } catch { 
+      return true; // 出错时默认开启
+    }
   });
 
   const prevStatus = useRef<Map<string, SessionStatus>>(new Map());
@@ -37,7 +43,7 @@ function App() {
   const toggleSound = async () => {
     const next = !soundEnabled;
     setSoundEnabled(next);
-    try { localStorage.setItem('ccm_sound_enabled', next ? '1' : '0'); } catch {
+    try { localStorage.setItem('aitop_sound_enabled', next ? '1' : '0'); } catch {
       // Ignore localStorage errors
     }
     if (next) {
@@ -75,7 +81,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>CCTop</h1>
+        <h1>AITOP</h1>
         <div className="header-info">
           <span className="session-count">{sessions.length} sessions</span>
           <span className="separator">|</span>

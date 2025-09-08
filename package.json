@@ -1,8 +1,8 @@
 {
-  "name": "cctop",
+  "name": "aitop",
   "version": "0.1.0",
   "description": "A simple web monitoring tools for Claude Code sessions",
-  "author": "wangyufeng",
+  "author": "wangyufeng <alanwang424@gmail.com>",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
@@ -18,14 +18,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wangyufeng0615/cctop.git"
+    "url": "https://github.com/wangyufeng0615/aitop.git"
   },
   "bugs": {
-    "url": "https://github.com/wangyufeng0615/cctop/issues"
+    "url": "https://github.com/wangyufeng0615/aitop/issues"
   },
-  "homepage": "https://github.com/wangyufeng0615/cctop#readme",
+  "homepage": "https://github.com/wangyufeng0615/aitop#readme",
   "bin": {
-    "cctop": "./cli.js"
+    "aitop": "./cli.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,7 +36,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "NODE_ENV=development tsx src/index.ts",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "NODE_ENV=development tsx watch src/index.ts",
+    "dev:client": "vite dev",
     "prebuild": "npm run clean",
     "build": "vite build && tsc -p tsconfig.server.json",
     "start": "NODE_ENV=production node dist/index.js",
@@ -45,10 +47,10 @@
     "format": "prettier --write 'src/**/*.{ts,tsx}' 'web/src/**/*.{ts,tsx,css}' '*.{json,md}'",
     "format:check": "prettier --check 'src/**/*.{ts,tsx}' 'web/src/**/*.{ts,tsx,css}' '*.{json,md}'",
     "prepublishOnly": "npm run lint && npm run build",
-    "clean": "rm -rf dist/ cctop-*.tgz",
+    "clean": "rm -rf dist/ aitop-*.tgz",
     "package": "npm run clean && npm run build && npm pack",
-    "package:local": "npm run package && echo '✅ Package created: cctop-*.tgz'",
-    "package:test": "npm run package && npm install -g ./cctop-*.tgz --force && echo '✅ Installed globally for testing'"
+    "package:local": "npm run package && echo '✅ Package created: aitop-*.tgz'",
+    "package:test": "npm run package && npm install -g ./aitop-*.tgz --force && echo '✅ Installed globally for testing'"
   },
   "dependencies": {
     "chalk": "^5.3.0",
@@ -61,6 +63,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "concurrently": "^8.2.2",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

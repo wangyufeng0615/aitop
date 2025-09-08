@@ -8,5 +8,24 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'dist/public'),
     emptyOutDir: false
+  },
+  resolve: {
+    alias: {
+      '@shared': path.resolve(__dirname, 'src/types/shared.ts')
+    }
+  },
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8998',
+        changeOrigin: true
+      },
+      '/ws': {
+        target: 'http://localhost:8998',
+        ws: true,
+        changeOrigin: true
+      }
+    }
   }
 })

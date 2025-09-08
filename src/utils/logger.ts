@@ -56,4 +56,4 @@ export function createLogger(prefix: string): Logger {
 }
 
 // Default logger instance
-export const logger = new Logger('cctop');
+export const logger = new Logger('aitop');
