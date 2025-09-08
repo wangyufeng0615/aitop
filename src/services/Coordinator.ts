@@ -74,7 +74,7 @@ export class Coordinator extends EventEmitter {
     logger.info(`Processing ${event.type} for session ${event.sessionId}`);
     
     // Find process by sessionId or create new one
-    let process = this.store.getProcessBySessionId(event.sessionId);
+    const process = this.store.getProcessBySessionId(event.sessionId);
     let pid = event.pid || process?.pid;
     
     // If no PID yet, try to find it from running processes

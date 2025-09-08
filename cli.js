@@ -31,15 +31,13 @@ async function main() {
   // Check if dist exists
   const fs = require('fs');
   const distPath = path.join(__dirname, 'dist');
-  if (!fs.existsSync(distPath)) {
-    console.log(chalk.yellow('⚠️  Production build not found. Building...'));
-    const { execSync } = require('child_process');
-    try {
-      execSync('npm run build', { stdio: 'inherit' });
-    } catch (error) {
-      console.error(chalk.red('❌ Build failed. Please run "npm run build" manually.'));
-      process.exit(1);
-    }
+  const distIndexPath = path.join(distPath, 'index.js');
+  
+  if (!fs.existsSync(distPath) || !fs.existsSync(distIndexPath)) {
+    console.error(chalk.red('❌ Production build not found.'));
+    console.error(chalk.yellow('   This appears to be a development environment.'));
+    console.error(chalk.yellow('   Please run "npm run build" first.'));
+    process.exit(1);
   }
   
   // Start the server

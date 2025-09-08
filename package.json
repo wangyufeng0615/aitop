@@ -1,6 +1,6 @@
 {
   "name": "aitop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple web monitoring tools for Claude Code sessions",
   "author": "wangyufeng <alanwang424@gmail.com>",
   "license": "MIT",

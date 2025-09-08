@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 import * as fs from 'fs';
-import * as path from 'path';
 import { watch, FSWatcher } from 'chokidar';
 import * as readline from 'readline';
 import { isSafeToRead } from '../utils/pathSecurity';
@@ -238,7 +237,7 @@ export class LogWatcher extends EventEmitter {
    * Stop all watchers
    */
   async stopAll(): Promise<void> {
-    for (const [sessionId, watchedFile] of this.watchers) {
+    for (const [, watchedFile] of this.watchers) {
       await watchedFile.watcher.close();
     }
     this.watchers.clear();

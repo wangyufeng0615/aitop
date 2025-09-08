@@ -155,7 +155,11 @@ export class WorkingDirResolver {
 
       // Safety timeout
       const timeout = setTimeout(() => {
-        try { child.kill(); } catch {}
+        try { 
+          child.kill(); 
+        } catch {
+          // Ignore error if process already exited
+        }
         resolve(null);
       }, 2000);
 

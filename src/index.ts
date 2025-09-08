@@ -1,7 +1,6 @@
 import express from 'express';
 import { WebSocketServer } from 'ws';
 import path from 'path';
-import fs from 'fs';
 import { Coordinator } from './services/Coordinator';
 import { ClaudeProcess } from './models/ClaudeProcess';
 import { createLogger } from './utils/logger';
@@ -80,7 +79,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     if (!req.path.startsWith('/api/') && !req.path.startsWith('/ws')) {
       // Redirect to Vite dev server
-      res.redirect(`http://localhost:5173${req.path}`);
+      res.redirect(`http://localhost:8999${req.path}`);
     } else {
       res.status(404).json({ error: 'Not found' });
     }

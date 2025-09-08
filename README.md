@@ -5,7 +5,6 @@
 [![Node.js Version](https://img.shields.io/node/v/aitop.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/wangyufeng0615/aitop/pulls)
-[![GitHub issues](https://img.shields.io/github/issues/wangyufeng0615/aitop.svg)](https://github.com/wangyufeng0615/aitop/issues)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/wangyufeng0615/aitop)
 
 ![aitop demo](docs/images/demo.png)
@@ -22,7 +21,14 @@ cd aitop
 npx aitop
 ```
 
-aitop will run at port 8988 and open your browser. I usually move the browser tab to side screen.
+or 
+```bash
+npm install -g aitop
+aitop
+```
+
+
+aitop will run at port 8998 and open your browser. I usually move the browser tab to side screen.
 
 **Please start aitop FIRST** before you open Claude Code, for full features.
 
